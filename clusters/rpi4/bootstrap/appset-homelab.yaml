@@ -21,7 +21,7 @@ spec:
         namespace: '{{path.basename}}'
       source:
         repoURL: https://github.com/abhi-kapoor/homelab.git
-        revision: main
+        targetRevision: main
         path: '{{path}}'
       syncPolicy:
         automated: { prune: true, selfHeal: true }
