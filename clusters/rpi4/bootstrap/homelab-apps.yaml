@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-self
+  name: homelab-bootstrap
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://github.com/abhi-kapoor/homelab.git
-    path: clusters/rpi4/bootstrap/argocd
+    path: clusters/rpi4/bootstrap
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc

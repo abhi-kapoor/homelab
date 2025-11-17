@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: kapoor-home
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - git:
+        repoURL: https://github.com/abhi-kapoor/homelab.git
+        revision: main
+        files:
+          - path: clusters/rpi4/platform/apps/*
+  template:
+    metadata:
+      name: 'kapoor-home-{{ .name }}'
+    spec:
+      project: default
+      destination:
+        name: https://kubernetes.default.svc
+        namespace: '{{ default .namespace .name }}'
+      syncPolicy:
+        automated: { prune: true, selfHeal: true }
+        syncOptions: [ "CreateNamespace=true" ]
