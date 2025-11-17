@@ -13,16 +13,16 @@ spec:
           - path: clusters/rpi4/platform/apps/*
   template:
     metadata:
-      name: 'kapoor-home-{{ .name }}'
+      name: 'kapoor-home-{{path.basename}}'
     spec:
       project: default
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ default .namespace .name }}'
+        namespace: '{{path.basename}}'
       source:
         repoURL: https://github.com/abhi-kapoor/homelab.git
         revision: main
-        path: '{{ .path }}'
+        path: '{{path}}'
       syncPolicy:
         automated: { prune: true, selfHeal: true }
         syncOptions: [ "CreateNamespace=true" ]
