@@ -22,7 +22,7 @@ spec:
       source:
         repoURL: https://github.com/abhi-kapoor/homelab.git
         targetRevision: main
-        path: '{{.path}}'
+        path: '{{.path.path}}'
       syncPolicy:
         automated: { prune: true, selfHeal: true }
         syncOptions: [ "CreateNamespace=true" ]
