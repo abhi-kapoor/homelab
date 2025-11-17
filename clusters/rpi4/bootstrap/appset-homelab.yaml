@@ -10,7 +10,7 @@ spec:
         repoURL: https://github.com/abhi-kapoor/homelab.git
         revision: main
         directories:
-          - path: clusters/rpi4/platform/apps/*
+          - path: clusters/rpi4/bootstrap/apps/*
   template:
     metadata:
       name: 'kapoor-home-{{path.basename}}'
