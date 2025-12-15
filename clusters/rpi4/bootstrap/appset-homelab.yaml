@@ -25,4 +25,4 @@ spec:
         path: '{{.path.path}}'
       syncPolicy:
         automated: { prune: true, selfHeal: true }
-        syncOptions: [ "CreateNamespace=true" ]
+        syncOptions: [ "CreateNamespace=true", "PreserveResourcesOnDelete=true" ]
