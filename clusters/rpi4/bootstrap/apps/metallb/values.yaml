@@ -1,5 +1,4 @@
 metallb:
-  # Disable FRR (BGP routing) - we only use L2 mode for homelab
   speaker:
     frr:
-      enabled: false
+      enabled: true
