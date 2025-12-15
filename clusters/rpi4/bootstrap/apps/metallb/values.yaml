@@ -1,1 +1,3 @@
 metallb:
+  podMonitor:
+    enabled: true
