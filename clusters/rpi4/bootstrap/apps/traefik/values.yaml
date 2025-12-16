@@ -10,8 +10,16 @@ traefik:
     enabled: true
     listeners:
       web:
-        namespacePolicy: All  # Allow HTTPRoutes from all namespaces
-      websecure:
-        port: 8443
-        protocol: HTTPS
-        namespacePolicy: All
+        namespacePolicy:
+          from: All  # Allow HTTPRoutes from all namespaces
+
+    websecure:         # HTTPS listener that matches entryPoint `websecure`
+      port: 443
+      protocol: HTTPS  # TLS terminates inside Traefik
+      namespacePolicy:
+        from: All
+      mode: Terminate
+      certificateRefs:
+        - kind: Secret
+          name: local-selfsigned-tls  # the Secret we created before the installation
+          group: ""
