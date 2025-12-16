@@ -4,4 +4,4 @@ version: 1.0.0
 dependencies:
   - name: traefik
     version: 37.4.0
-    repository: oci://ghcr.io/traefik/helm/traefik
+    repository: oci://ghcr.io/traefik/helm
