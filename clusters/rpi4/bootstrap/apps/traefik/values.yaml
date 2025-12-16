@@ -5,3 +5,13 @@ traefik:
   providers:
     kubernetesGateway:
       enabled: true
+
+  gateway:
+    enabled: true
+    listeners:
+      web:
+        namespacePolicy: All  # Allow HTTPRoutes from all namespaces
+      websecure:
+        port: 8443
+        protocol: HTTPS
+        namespacePolicy: All
