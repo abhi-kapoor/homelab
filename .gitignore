@@ -1,0 +1,4 @@
+# Helm generated files
+**/Chart.lock
+**/charts/
+
