@@ -1,0 +1,23 @@
+victoria-metrics-single:
+  server:
+    route:
+      enabled: true
+      hostnames:
+        - vm.kapoor.home.arpa
+      gateway:
+        name: traefik-gateway
+        namespace: traefik
+        sectionName: websecure
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        memory: 512Mi
+
+    retentionPeriod: 30d
+
+    persistentVolume:
+      enabled: true
+      size: 10Gi

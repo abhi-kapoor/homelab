@@ -11,3 +11,13 @@ images:
 - name: quay.io/argoproj/argocd
   newName: ghcr.io/argoproj/argo-cd/argocd
   newTag: 3.3.0-ef6a27fd
+
+# Run ArgoCD in insecure mode - Traefik handles TLS termination externally
+patches:
+- target:
+    kind: Deployment
+    name: argocd-server
+  patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/args/-
+      value: --insecure
