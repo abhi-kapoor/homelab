@@ -1,4 +1,5 @@
 victoria-metrics-single:
+  nameOverride: vm-single
   server:
     route:
       enabled: true
