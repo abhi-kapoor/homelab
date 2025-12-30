@@ -3,6 +3,13 @@ longhorn:
     defaultClass: true
     defaultClassReplicaCount: 1  # Single node for now, increase when adding nodes
 
+  # CSI components - reduce replicas for single node RPI4
+  csi:
+    attacherReplicaCount: 1
+    provisionerReplicaCount: 1
+    resizerReplicaCount: 1
+    snapshotterReplicaCount: 1
+
   # Resource limits for RPI4
   longhornManager:
     resources:
