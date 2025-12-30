@@ -5,10 +5,10 @@ victoria-metrics-single:
       enabled: true
       hostnames:
         - vm.kapoor.home.arpa
-      gateway:
-        name: traefik-gateway
-        namespace: traefik
-        sectionName: websecure
+      parentRefs:
+        - kind: Gateway
+          name: traefik-gateway
+          namespace: traefik
 
     resources:
       requests:
