@@ -19,13 +19,12 @@ victoria-metrics-k8s-stack:
 
     route:
       enabled: true
-      spec:
-        hostnames:
-          - vm.kapoor.home.arpa
-        parentRefs:
-          - name: traefik-gateway
-            namespace: traefik
-            sectionName: websecure
+      hostnames:
+        - vm.kapoor.home.arpa
+      parentRefs:
+        - name: traefik-gateway
+          namespace: traefik
+          sectionName: websecure
 
   # VMAgent scrapes metrics and sends to VMSingle
   vmagent:
@@ -57,13 +56,12 @@ victoria-metrics-k8s-stack:
     route:
       main:
         enabled: true
-        spec:
-          hostnames:
-            - grafana.kapoor.home.arpa
-          parentRefs:
-            - name: traefik-gateway
-              namespace: traefik
-              sectionName: websecure
+        hostnames:
+          - grafana.kapoor.home.arpa
+        parentRefs:
+          - name: traefik-gateway
+            namespace: traefik
+            sectionName: websecure
 
   # Disable Alertmanager for now
   alertmanager:
