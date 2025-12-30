@@ -25,4 +25,7 @@ spec:
         path: '{{.path.path}}'
       syncPolicy:
         automated: { prune: true, selfHeal: true }
-        syncOptions: [ "CreateNamespace=true", "PreserveResourcesOnDelete=true" ]
+        syncOptions:
+          - CreateNamespace=true
+          - PreserveResourcesOnDelete=true
+          - ServerSideApply=true  # Required for large CRDs (prometheus-operator)
