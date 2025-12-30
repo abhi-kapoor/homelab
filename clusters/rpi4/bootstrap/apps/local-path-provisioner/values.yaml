@@ -1,0 +1,12 @@
+# longhorn on a single node is too intensive for the RPI4, so we use local-path-provisioner instead for now
+local-path-provisioner:
+  storageClass:
+    defaultClass: true
+  
+  resources:
+    requests:
+      cpu: 80m
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
