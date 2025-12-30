@@ -1,24 +1,102 @@
-victoria-metrics-single:
-  nameOverride: vm-single
-  server:
+victoria-metrics-k8s-stack:
+  fullnameOverride: vm
+
+  # Use VMSingle (not cluster) for single-node setup
+  vmsingle:
+    enabled: true
+    spec:
+      retentionPeriod: "30d"
+      storage:
+        resources:
+          requests:
+            storage: 10Gi
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 512Mi
+
     route:
       enabled: true
-      hostnames:
-        - vm.kapoor.home.arpa
-      parentRefs:
-        - kind: Gateway
-          name: traefik-gateway
-          namespace: traefik
+      spec:
+        hostnames:
+          - vm.kapoor.home.arpa
+        parentRefs:
+          - name: traefik-gateway
+            namespace: traefik
+            sectionName: websecure
 
+  # VMAgent scrapes metrics and sends to VMSingle
+  vmagent:
+    enabled: true
+    spec:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          memory: 256Mi
+
+  # Disable VMCluster (using VMSingle instead)
+  vmcluster:
+    enabled: false
+
+  grafana:
+    enabled: true
+    persistence:
+      enabled: true
+      size: 1Gi
     resources:
       requests:
-        cpu: 100m
-        memory: 256Mi
+        cpu: 50m
+        memory: 128Mi
       limits:
-        memory: 512Mi
+        memory: 256Mi
 
-    retentionPeriod: 30d
+    route:
+      main:
+        enabled: true
+        spec:
+          hostnames:
+            - grafana.kapoor.home.arpa
+          parentRefs:
+            - name: traefik-gateway
+              namespace: traefik
+              sectionName: websecure
 
-    persistentVolume:
-      enabled: true
-      size: 10Gi
+  # Disable Alertmanager for now
+  alertmanager:
+    enabled: false
+
+  # VMAlert for alerting rules (optional, keep disabled for now)
+  vmalert:
+    enabled: false
+
+  # Enable default dashboards for Grafana
+  defaultDashboards:
+    enabled: true
+
+  # Prometheus CRDs compatibility (ServiceMonitor, PodMonitor)
+  prometheus-operator-crds:
+    enabled: true
+
+  # kube-state-metrics for cluster metrics
+  kube-state-metrics:
+    enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        memory: 128Mi
+
+  # prometheus-node-exporter for node metrics
+  prometheus-node-exporter:
+    enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        memory: 64Mi
