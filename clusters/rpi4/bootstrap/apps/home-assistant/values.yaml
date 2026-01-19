@@ -1,6 +1,7 @@
 home-assistant:
   env:
-    TZ: "America/New_York" 
+    - name: TZ
+      value: America/New_York
 
   persistence:
     enabled: true
