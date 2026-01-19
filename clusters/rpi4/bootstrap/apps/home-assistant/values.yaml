@@ -1,0 +1,16 @@
+home-assistant:
+  env:
+    TZ: "America/New_York" 
+
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 5Gi
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 512Mi
+
