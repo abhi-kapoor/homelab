@@ -16,6 +16,6 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: home-assistant
+        - name: kapoor-home-home-assistant
           port: 8080
 
