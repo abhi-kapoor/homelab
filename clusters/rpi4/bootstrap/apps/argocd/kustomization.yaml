@@ -6,6 +6,8 @@ namespace: argocd
 resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 - httproute.yaml
+- ns.yaml
+- homelab-apps.yaml  # App of Apps - manages bootstrap/ including ApplicationSet
 
 images:
 - name: quay.io/argoproj/argocd
