@@ -15,3 +15,7 @@ home-assistant:
     limits:
       memory: 512Mi
 
+  configuration:
+    enabled: true
+    forceInit: true
+
