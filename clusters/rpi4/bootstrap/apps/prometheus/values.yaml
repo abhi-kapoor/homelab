@@ -1,0 +1,52 @@
+prometheus:
+  # Disable all the extra components
+  alertmanager:
+    enabled: false
+  kube-state-metrics:
+    enabled: false
+  prometheus-node-exporter:
+    enabled: false
+  prometheus-pushgateway:
+    enabled: false
+
+  server:
+    # Minimal resources for RPI4
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        memory: 512Mi
+
+    # Persistent storage
+    persistentVolume:
+      enabled: true
+      storageClass: local-path
+      size: 2Gi
+
+    retention: "7d"
+
+    extraScrapeConfigs:
+      - job_name: 'esp32-office-sensor'
+        scrape_interval: 30s
+        static_configs:
+          - targets:
+              - '192.168.30.50:80'
+            labels:
+              location: 'office'
+              device: 'esp32'
+
+    route:
+      main:
+        enabled: true
+        parentRefs:
+          - name: traefik-gateway
+            namespace: traefik
+            sectionName: websecure
+        hostnames:
+          - "prometheus.kapoor.home.arpa"
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /
