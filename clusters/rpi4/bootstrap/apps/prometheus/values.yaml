@@ -2,6 +2,14 @@ prometheus:
   # Disable all the extra components
   alertmanager:
     enabled: false
+
+  extraScrapeConfigs: |
+    - job_name: 'esp32-office-sensor'
+      metrics_path: /metrics
+      scrape_interval: 30s
+      static_configs:
+        - targets:
+            - '192.168.30.50:80'
   kube-state-metrics:
     enabled: false
   prometheus-node-exporter:
@@ -25,14 +33,6 @@ prometheus:
       size: 2Gi
 
     retention: "7d"
-
-    extraScrapeConfigs:
-      - job_name: 'esp32-office-sensor'
-        metrics_path: /metrics
-        scrape_interval: 30s
-        static_configs:
-          - targets:
-              - '192.168.30.50:80'
 
     route:
       main:
